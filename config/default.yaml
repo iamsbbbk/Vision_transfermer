@@ -1,0 +1,32 @@
+# Default configuration file for Vision Transformers for Dense Prediction
+
+# General settings
+project_name: "Vision Transformers for Dense Prediction"
+log_dir: "experiments/logs"
+checkpoint_dir: "experiments/checkpoints"
+save_interval: 5  # Save model checkpoint every 5 epochs
+
+# Dataset settings
+dataset: "voc"  # Options: cityscapes, voc
+data_dir: "data/VOC2012/VOC2012/VOCdevkit/VOC2012"
+batch_size: 8
+num_workers: 4
+
+# Model settings
+num_classes: 19  # Number of classes for segmentation
+backbone: "resnet50"  # Options: resnet50, resnet101
+pretrained: True
+
+# Training settings
+epochs: 50
+lr: 0.01
+momentum: 0.9
+weight_decay: 0.0005
+
+# Evaluation settings
+eval_batch_size: 8
+
+# Inference settings
+mean: [0.485, 0.456, 0.406]
+std: [0.229, 0.224, 0.225]
+label_colors: "configs/cityscapes_colors.txt"  # Path to label color map file

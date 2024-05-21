@@ -1,0 +1,32 @@
+# Custom configuration file for Vision Transformers for Dense Prediction
+
+# General settings
+project_name: "Vision Transformers for Dense Prediction - Custom"
+log_dir: "experiments/logs/custom"
+checkpoint_dir: "experiments/checkpoints/custom"
+save_interval: 10  # Save model checkpoint every 10 epochs
+
+# Dataset settings
+dataset: "voc"  # Options: cityscapes, voc
+data_dir: "data/datasets"
+batch_size: 16
+num_workers: 8
+
+# Model settings
+num_classes: 21  # Number of classes for segmentation
+backbone: "resnet101"  # Options: resnet50, resnet101
+pretrained: True
+
+# Training settings
+epochs: 100
+lr: 0.001
+momentum: 0.95
+weight_decay: 0.0001
+
+# Evaluation settings
+eval_batch_size: 16
+
+# Inference settings
+mean: [0.485, 0.456, 0.406]
+std: [0.229, 0.224, 0.225]
+label_colors: "configs/voc_colors.txt"  # Path to label color map file
