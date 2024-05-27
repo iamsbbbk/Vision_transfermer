@@ -8,6 +8,9 @@ class DPT(nn.Module):
     def __init__(self, num_classes=21, backbone='resnet50', pretrained=True):
         super(DPT, self).__init__()
 
+        # 设置 num_classes 属性
+        self.num_classes = num_classes
+
         # Backbone
         if backbone == 'resnet50':
             self.backbone = models.resnet50(pretrained=pretrained)
