@@ -1,5 +1,7 @@
+import os
 import torch
 import torch.nn as nn
+from torchviz import make_dot
 
 class AdaptiveAttentionFusionModule(nn.Module):
     def __init__(self, in_channels=2048):
@@ -18,3 +20,4 @@ class AdaptiveAttentionFusionModule(nn.Module):
         channel_attention = self.channel_attention(x)
         attention = spatial_attention + channel_attention
         return x * attention
+
