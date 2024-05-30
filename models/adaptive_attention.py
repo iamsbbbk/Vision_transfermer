@@ -11,10 +11,17 @@ class SpatialAttentionModule(nn.Module):
 
         self.conv1 = nn.Conv2d(in_channels, in_channels, 1)
 
+        self.LeakyRelu = nn.LeakyReLU(0.01, inplace=True)
+
         self.Sigmoid = nn.Sigmoid()
 
     def forward(self, x):
+
+        print(x.shape)
+
         x_ = self.conv1(x)
+
+        print(x_.shape)
 
         pooling1 = self.max_pool(x_)
 
@@ -22,9 +29,13 @@ class SpatialAttentionModule(nn.Module):
 
         pool_cat = torch.mul(pooling1, pooling2)
 
+        print(pool_cat.shape)
+
         conv_1 = self.conv1(x_)
 
         conv_2 = torch.mul(conv_1, pool_cat)
+
+        print(conv_2.shape)
 
         out = torch.add(conv_2, x_)
 
@@ -32,12 +43,13 @@ class SpatialAttentionModule(nn.Module):
 
         out = torch.add(x, out)
 
+        out = self.LeakyRelu(out)
+
         out = self.conv1(out)
 
         out = self.Sigmoid(out)
 
         return out
-
 
 class ChannelAttentionModule(nn.Module):
 
@@ -51,9 +63,11 @@ class ChannelAttentionModule(nn.Module):
         self.conv1 = nn.Conv2d(in_channels, in_channels, 1, bias=False)
         #激活函数
         self.relu = nn.ReLU()
+
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
+
         max_pool = self.max_pool(x)
 
         avg_pool = self.avg_pool(x)
@@ -92,3 +106,6 @@ class AdaptiveAttentionFusionModule(nn.Module):
         out = torch.add(x1, x2)
 
         return out
+
+
+
